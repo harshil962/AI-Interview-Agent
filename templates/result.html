@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Result - AI Interview Practice Agent{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    <!-- SCORE CARD -->
+    <div class="page-card mb-4 fade-up" style="position:relative;overflow:hidden;">
+        <div style="position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,var(--accent-soft) 0%,transparent 70%);pointer-events:none;"></div>
+
+        <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--txt3);margin-bottom:1rem;">Interview Result</p>
+
+        <div style="display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:0.75rem;">
+            <span class="result-score-big">{{ score }}<span style="font-size:1.4rem;color:var(--txt3);font-weight:400;">/10</span></span>
+            <span class="topic-badge" style="font-size:14px;padding:6px 16px;margin-bottom:8px;">{{ topic }}</span>
+        </div>
+
+        {% if score >= 8 %}
+            <div style="display:inline-flex;align-items:center;gap:8px;background:var(--success-soft);border:1px solid rgba(14,158,110,0.25);border-radius:100px;padding:5px 14px;">
+                <span>🏆</span>
+                <p style="color:var(--success);font-size:14px;font-weight:600;margin:0;">Excellent work! You have a strong understanding of this topic.</p>
+            </div>
+        {% elif score >= 5 %}
+            <div style="display:inline-flex;align-items:center;gap:8px;background:var(--gold-soft);border:1px solid rgba(212,146,10,0.25);border-radius:100px;padding:5px 14px;">
+                <span>📈</span>
+                <p style="color:var(--gold);font-size:14px;font-weight:600;margin:0;">Good attempt! Review the feedback below to improve further.</p>
+            </div>
+        {% else %}
+            <div style="display:inline-flex;align-items:center;gap:8px;background:var(--danger-soft);border:1px solid rgba(214,64,64,0.25);border-radius:100px;padding:5px 14px;">
+                <span>💪</span>
+                <p style="color:var(--danger);font-size:14px;font-weight:600;margin:0;">Keep practicing! Use the feedback to strengthen your understanding.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Q & A -->
+    <div class="row g-4 mb-4 fade-up fade-up-1">
+        <div class="col-lg-6">
+            <div class="page-card h-100">
+                <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--txt3);margin-bottom:10px;">Question</p>
+                <p style="color:var(--txt1);font-size:15px;line-height:1.78;margin:0;font-weight:500;">{{ question }}</p>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="page-card h-100">
+                <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--txt3);margin-bottom:10px;">Your Answer</p>
+                <p style="white-space:pre-line;color:var(--txt2);font-size:14px;line-height:1.78;margin:0;">{{ answer }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI FEEDBACK -->
+    <div class="page-card mb-4 fade-up fade-up-2" style="border-left:4px solid var(--accent);">
+        <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--accent);margin-bottom:10px;">🤖 AI Feedback</p>
+        <p style="white-space:pre-line;color:var(--txt2);font-size:15px;line-height:1.82;margin:0;">{{ feedback }}</p>
+    </div>
+
+    <!-- FALLBACK NOTICE (new) -->
+    <div class="page-card mb-4 fade-up fade-up-3" style="background:var(--surface2);border-color:var(--border);">
+        <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:1.1rem;">ℹ️</span>
+            <p style="color:var(--txt3);font-size:13px;margin:0;">If AI evaluation is temporarily unavailable, a basic score is shown so your practice can continue uninterrupted.</p>
+        </div>
+    </div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;" class="fade-up fade-up-3">
+        <a href="{{ url_for('start_interview') }}" class="btn-main">Practice Again</a>
+        <a href="{{ url_for('dashboard') }}" class="btn-ghost">Go to Dashboard</a>
+        <a href="{{ url_for('history') }}" class="btn-ghost">View History</a>
+    </div>
+</div>
+{% endblock %}

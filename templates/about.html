@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}About - AI Interview Practice Agent{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <div style="margin-bottom:2rem;" class="fade-up">
+                <p class="page-eyebrow">Project Info</p>
+                <h1 class="page-heading" style="font-size:2.25rem;">About This Project</h1>
+            </div>
+
+            <!-- PROBLEM → SOLUTION → OUTCOME (new) -->
+            <div class="row g-3 mb-4 fade-up fade-up-1">
+                <div class="col-md-4">
+                    <div class="page-card h-100 text-center" style="border-top:3px solid var(--danger);">
+                        <div style="font-size:1.6rem;margin-bottom:8px;">❌</div>
+                        <h6 style="font-family:'Syne',sans-serif;font-weight:700;color:var(--txt1);margin-bottom:6px;">Problem</h6>
+                        <p style="color:var(--txt2);font-size:13px;margin:0;">Students lack access to realistic, feedback-driven interview practice before entering the job market.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="page-card h-100 text-center" style="border-top:3px solid var(--accent);">
+                        <div style="font-size:1.6rem;margin-bottom:8px;">⚙️</div>
+                        <h6 style="font-family:'Syne',sans-serif;font-weight:700;color:var(--txt1);margin-bottom:6px;">Solution</h6>
+                        <p style="color:var(--txt2);font-size:13px;margin:0;">AI-powered mock interviews with instant scoring, plus n8n automation for reminders and result summaries.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="page-card h-100 text-center" style="border-top:3px solid var(--success);">
+                        <div style="font-size:1.6rem;margin-bottom:8px;">✅</div>
+                        <h6 style="font-family:'Syne',sans-serif;font-weight:700;color:var(--txt1);margin-bottom:6px;">Outcome</h6>
+                        <p style="color:var(--txt2);font-size:13px;margin:0;">Better confidence, actionable feedback, and a tracked performance history to guide improvement.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-card mb-4 fade-up fade-up-2">
+                <p style="color:var(--txt2);font-size:16px;line-height:1.85;margin-bottom:1rem;">
+                    The AI Interview Practice Agent is a learning-based web application developed using
+                    <strong style="color:var(--txt1);">Python, Flask, SQLite, Bootstrap, and n8n</strong>.
+                </p>
+                <p style="color:var(--txt2);font-size:16px;line-height:1.85;margin-bottom:1rem;">
+                    It helps students and freshers practice interview questions in different topics such as Python,
+                    DBMS, OOP, and HR. The system evaluates answers, provides feedback, and stores history for progress tracking.
+                </p>
+                <p style="color:var(--txt2);font-size:16px;line-height:1.85;margin:0;">
+                    The goal of this project is to improve interview confidence, communication, and technical understanding through consistent, AI-guided practice.
+                </p>
+            </div>
+
+            <div class="row g-4 fade-up fade-up-3">
+                <div class="col-md-6">
+                    <div class="feature-card">
+                        <div class="icon-circle" style="background:var(--accent-soft);">🐍</div>
+                        <h4>Python &amp; Flask</h4>
+                        <p>Backend powered by Flask with SQLite for fast and lightweight data storage.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="feature-card">
+                        <div class="icon-circle" style="background:var(--success-soft);">🤖</div>
+                        <h4>AI Evaluation</h4>
+                        <p>Each answer is evaluated by AI which provides a score and detailed constructive feedback.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="feature-card" style="border-top:3px solid var(--gold);">
+                        <div class="icon-circle" style="background:var(--gold-soft);">⚙️</div>
+                        <h4>n8n Automation</h4>
+                        <p>After every interview, n8n logs your result and can trigger a personalized email feedback summary — no manual effort needed.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="feature-card">
+                        <div class="icon-circle" style="background:var(--danger-soft);">📊</div>
+                        <h4>Progress Tracking</h4>
+                        <p>Full history dashboard showing scores over time, best topics, and areas needing improvement.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

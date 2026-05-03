@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block title %}Start Interview - AI Interview Practice Agent{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    <div style="margin-bottom:2rem;" class="fade-up">
+        <p class="page-eyebrow">Practice</p>
+        <h2 class="page-heading">Start Interview Practice</h2>
+        <p style="color:var(--txt2);">Select a topic, difficulty, and type — then get an AI-generated question.</p>
+    </div>
+
+    <div class="page-card mb-4 fade-up fade-up-1">
+        <form method="POST">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <label class="form-label">Choose Topic</label>
+                    <select name="topic" class="form-select">
+                        <option value="">Select a topic</option>
+                        <option value="Python">🐍 Python</option>
+                        <option value="Django">🌐 Django</option>
+                        <option value="Flask">🔥 Flask</option>
+                        <option value="OOP">🧩 OOP</option>
+                        <option value="DBMS">🗄️ DBMS</option>
+                        <option value="HR">🤝 HR</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Or Enter Custom Topic</label>
+                    <input type="text" name="custom_topic" class="form-control" placeholder="e.g. API design, SQL joins, recursion…">
+                </div>
+
+                <div class="col-md-2">
+                    <label class="form-label">Difficulty</label>
+                    <select name="difficulty" class="form-select" required>
+                        <option value="easy">🟢 Easy</option>
+                        <option value="medium">🟡 Medium</option>
+                        <option value="hard">🔴 Hard</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <label class="form-label">Question Type</label>
+                    <select name="question_type" class="form-select" required>
+                        <option value="theory">📖 Theory</option>
+                        <option value="coding">💻 Coding</option>
+                        <option value="mcq">☑️ MCQ</option>
+                        <option value="hr">🤝 HR</option>
+                    </select>
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="btn-main">Generate Question →</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {% if question %}
+    <div class="page-card fade-up">
+        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:1.5rem;">
+            <span class="topic-badge" style="font-size:13px;padding:5px 14px;">{{ selected_topic }}</span>
+            <span style="font-size:12px;padding:5px 14px;border-radius:100px;background:var(--gold-soft);color:var(--gold);border:1px solid rgba(212,146,10,0.2);font-weight:600;">{{ selected_difficulty }}</span>
+            <span style="font-size:12px;padding:5px 14px;border-radius:100px;background:var(--success-soft);color:var(--success);border:1px solid rgba(14,158,110,0.2);font-weight:600;">{{ selected_type }}</span>
+        </div>
+
+        <div class="question-box mb-4">
+            <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--txt3);margin-bottom:8px;">Question</p>
+            <p style="margin:0;color:var(--txt1);font-size:15px;line-height:1.78;font-weight:500;">{{ question }}</p>
+        </div>
+
+        <!-- Answer quality hint -->
+        <div style="display:flex;align-items:center;gap:10px;background:var(--accent-soft);border-radius:10px;padding:10px 14px;margin-bottom:1.25rem;border:1px solid var(--border);">
+            <span style="font-size:1.1rem;">💡</span>
+            <p style="color:var(--accent);font-size:13px;font-weight:600;margin:0;">Tip: Best results come from 2–3 sentence answers with a clear explanation and example.</p>
+        </div>
+
+        <form method="POST" action="{{ url_for('submit_answer') }}" onsubmit="showLoading()">
+            <input type="hidden" name="topic" value="{{ selected_topic }}">
+            <input type="hidden" name="question" value="{{ question }}">
+            <input type="hidden" name="difficulty" value="{{ selected_difficulty }}">
+            <input type="hidden" name="question_type" value="{{ selected_type }}">
+
+            <div class="mb-4">
+                <label class="form-label">Write Your Answer</label>
+                <textarea name="answer" id="answer" class="form-control" rows="9" placeholder="Type your detailed answer here…" required></textarea>
+                <small id="charCount" style="color:var(--txt3);font-size:12px;">0 characters</small>
+            </div>
+
+            <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+                <button type="submit" id="submitBtn" class="btn-main">Submit Answer →</button>
+                <a href="{{ url_for('start_interview') }}" class="btn-ghost">Get New Question</a>
+            </div>
+
+            <p id="loadingText" style="display:none;color:var(--accent);font-size:13px;font-weight:600;margin-top:12px;">
+                ⏳ Evaluating your answer, please wait...
+            </p>
+        </form>
+    </div>
+    {% endif %}
+
+</div>
+
+<script>
+    const answerBox = document.getElementById("answer");
+    const charCount = document.getElementById("charCount");
+
+    if (answerBox && charCount) {
+        answerBox.addEventListener("input", function () {
+            charCount.textContent = this.value.length + " characters";
+        });
+    }
+
+    function showLoading() {
+        const submitBtn = document.getElementById("submitBtn");
+        const loadingText = document.getElementById("loadingText");
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Evaluating...";
+        loadingText.style.display = "block";
+    }
+</script>
+
+{% endblock %}

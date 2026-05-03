@@ -1,0 +1,34 @@
+<!-- ═══════════════════════ LOGIN ═══════════════════════ -->
+{% extends "base.html" %}
+{% block title %}Login - AI Interview Practice Agent{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div style="text-align:center;margin-bottom:2rem;" class="fade-up">
+                <div style="width:54px;height:54px;background:var(--accent);border-radius:14px;box-shadow:0 0 24px var(--accent-glow);display:inline-flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:1rem;">🔐</div>
+                <h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.75rem;letter-spacing:-0.025em;margin-bottom:6px;color:var(--txt1);">Welcome back</h2>
+                <p style="color:var(--txt2);font-size:14px;">Sign in to continue your practice</p>
+            </div>
+
+            <div class="auth-card fade-up fade-up-1">
+                <form method="POST">
+                    <div class="mb-4">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" name="email" class="form-control" placeholder="you@example.com" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn-main w-100" style="justify-content:center;">Login →</button>
+                </form>
+                <div style="text-align:center;margin-top:1.5rem;font-size:14px;color:var(--txt3);">
+                    Don't have an account?
+                    <a href="{{ url_for('register') }}" style="color:var(--accent);text-decoration:none;font-weight:600;"> Register here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

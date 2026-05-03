@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}History - AI Interview Practice Agent{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    <div style="margin-bottom:2rem;" class="fade-up">
+        <p class="page-eyebrow">Your Progress</p>
+        <h2 class="page-heading">Interview History</h2>
+        <p style="color:var(--txt2);">All your past practice sessions in one place.</p>
+    </div>
+
+    <div class="page-card fade-up fade-up-1">
+        {% if interviews %}
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Question</th>
+                            <th>Answer</th>
+                            <th>Score</th>
+                            <th>Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for interview in interviews %}
+                        <tr>
+                            <td><span class="topic-badge">{{ interview['topic'] }}</span></td>
+                            <td style="max-width:200px;color:var(--txt1);">{{ interview['question'][:60] }}{% if interview['question']|length > 60 %}...{% endif %}</td>
+                            <td style="max-width:180px;color:var(--txt2);">{{ interview['answer'][:60] }}{% if interview['answer']|length > 60 %}...{% endif %}</td>
+                            <td><span class="score-badge">{{ interview['score'] }}/10</span></td>
+                            <td style="font-size:13px;white-space:nowrap;color:var(--txt3);">{{ interview['created_at'] }}</td>
+                            <td>
+                                <form method="POST" action="{{ url_for('delete_interview', interview_id=interview['id']) }}" style="margin:0;">
+                                    <button class="btn-danger-sm" type="submit" onclick="return confirm('Delete this attempt?')">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div style="text-align:center;padding:4rem 1rem;">
+                <div style="font-size:3rem;margin-bottom:1rem;">📋</div>
+                <p style="color:var(--txt3);font-size:15px;margin-bottom:1.5rem;">No history found. Start practicing to see your progress here.</p>
+                <a href="{{ url_for('start_interview') }}" class="btn-main">Start First Interview</a>
+            </div>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}
