@@ -77,6 +77,3 @@ Before upload:
 ✔ Clean code  
 
 ---
-
-If you want next level:
-👉 I can help you **make your GitHub look like professional developer profile (very important for jobs)**
