@@ -25,6 +25,6 @@ A smart web application that helps users practice interview questions and get in
 ## ⚙️ Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/AI-Interview-Agent.git
+git clone https://github.com/harshil962/AI-Interview-Agent.git
 cd AI-Interview-Agent
 pip install -r requirements.txt
